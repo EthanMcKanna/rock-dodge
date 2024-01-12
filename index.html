@@ -104,7 +104,7 @@ function canvasApp() {
     var y = 0
     var dx = 10
     function drawSprite() {
-        if (keys_pressed['Space'] == true) {
+        if (keys_pressed['Space'] == true || keys_pressed['Touch'] == true) {
             if (frame_ticks == 3){
                 ctx.clearRect(x, y, 48, 48)
 
@@ -150,6 +150,18 @@ function canvasApp() {
         })
         window.addEventListener('keyup', function(e) {
            keys_pressed[e.code] = false
+        })
+        window.addEventListener('touchstart', function(e) {
+           keys_pressed['Touch'] = true
+        })
+        window.addEventListener('touchend', function(e) {
+           keys_pressed['Touch'] = false
+        })
+        canvas.addEventListener('mousedown', function(e) {
+           keys_pressed['Space'] = true
+        })
+        canvas.addEventListener('mouseup', function(e) {
+           keys_pressed['Space'] = false
         })
         animationLoop();
     }
